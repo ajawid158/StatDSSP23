@@ -24,6 +24,18 @@ fdtSmoker
 
 names(dfTips)
 ##Create a function that returns the FDT of a cat var
+
+#Write a function that adds two numbers
+
+sm=function(x,y){
+  s=x+y
+  return(s)
+}
+
+
+
+
+###
 fdtCat=function(x){
   absFreq=table(x)
   relFreq=prop.table(absFreq)
@@ -35,6 +47,7 @@ fdtCat=function(x){
 #test
 fdtCat(dfTips$day)
 #export using write.csv(....)
+
 
 #Numerical variables
 
