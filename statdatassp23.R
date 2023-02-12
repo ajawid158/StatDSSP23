@@ -9,13 +9,22 @@
 #dataset tips
 
 dfTips=read.csv(url('https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv'))
+View(dfTips)
 head(dfTips)
+dim(dfTips)
+names(dfTips)
 
-#FDT smoker
+  #FDT smoker
+    #Smoker variable
+
 absFreq=table(dfTips$smoker)
 absFreq
+
+#round(prop.table(absFreq),2)
+
 relFreq=round(prop.table(absFreq), 2)
 relFreq
+
 cumFreq=cumsum(relFreq)
 cumFreq
 
@@ -29,25 +38,29 @@ names(dfTips)
 
 sm=function(x,y){
   s=x+y
-  return(s)
+  p=x*y
+  d=x-y
+  return(c(s,p,d))
 }
 
-
-
+sm(3,4)
 
 ###
-fdtCat=function(x){
+fdtQL=function(x){
+  
   absFreq=table(x)
-  relFreq=prop.table(absFreq)
+  relFreq=round(prop.table(absFreq), 3)
   cumFreq=cumsum(relFreq)
   fdtx=cbind(absFreq, relFreq, cumFreq)
   return(fdtx)
 }
 
-#test
-fdtCat(dfTips$day)
+fdtQL(dfTips$smoker)
+fdtQL(dfTips$sex)
+fdtQL(dfTips$time)
 #export using write.csv(....)
 
+#Loops and conditional functions work in R
 
 #Numerical variables
 
