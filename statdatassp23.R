@@ -87,19 +87,20 @@ for (k in 1:length(dfTips$tip)) {
 }
 
 
+
 tipAmount=cbind(dfTips$tip, catTips)
 View(tipAmount)
 
-
+fdtQL(catTips)
 
 
 #Descriptive methods
-#Univar case 
-#Graphs 
-#Categorical vars (pie and bar)
+  #Univar case 
+    #Graphs 
+      #Categorical vars (pie and bar)
 
 #create the FDT 
-fdtSmoker=fdtCat(dfTips$smoker)[,1]
+fdtSmoker=fdtQL(dfTips$smoker)[,2]
 fdtSmoker
 
 pie(fdtSmoker, 
@@ -131,47 +132,67 @@ plot(density(dfTips$tip),
 mean(dfTips$tip)
 median(dfTips$tip)
 
-#Descriptive methods
-#Univar case 
-#Numerical methods
-#variation in the distribution (range, sd, var, mad)
-range(dfTips$tip)
-sd(dfTips$tip)
-var(dfTips$tip)
-mad(dfTips$tip)
 
-#Descriptive methods
-#Univar case 
-#Numerical methods
+
+
+
+#+Descriptive methods+#
+  #Univar case 
+    #Numerical methods
+      #variation in the distribution (range, sd, var, mad)
+dfTips=read.csv(url('https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv'))
+head(dfTips)
+#tip
+plot(density(dfTips$tip))
+
+#Center
+#Midpoint/median, where most observations are, average,middle, Mode 
+mean(dfTips$tip)
+median(dfTips$tip)
+
 #location (quantiles and percentiles)
 quantile(dfTips$tip)
-boxplot(dfTips$tip,
-        horizontal = T, 
-        col='#0033FF')
-boxplot.stats(dfTips$tip) #outliers
-quantile(dfTips$tip, .9)
-plot(density(dfTips$total_bill))
-
-quantile(dfTips$total_bill, .4)
-
-dim(dfTips)
-#write a fun that retuns any location in the dist
+quantile(dfTips$tip, 0.4)
+#write a fun that returns any location in the dist
 
 myQnt=function(x,q){
   pr=quantile(x, q)
   return(pr)
 }
-myQnt(dfTips$total_bill, .4)
+
+#1- myQnt()
+
+boxplot(dfTips$tip,
+        horizontal = T, 
+        col='#0033FF')
+
+boxplot.stats(dfTips$tip) #outliers
+quantile(dfTips$tip, .9)
+
+View(dfTips)
+#remove the outliers
+
+tipNew=dfTips$tip[dfTips$tip<5.5]
+
+
+boxplot(tipNew, horizontal = T)
+mean(tipNew)
+
+#Variation
+range(dfTips$tip)
+sd(dfTips$tip)
+var(dfTips$tip)   #center means the mean
+mad(dfTips$tip)
 
 ##ECDF 
-plot(ecdf(dfTips$total_bill), 
+plot(ecdf(dfTips$tip), 
      color='blue', 
-     main='ECDF of Total bill', 
-     xlab='total bill')
+     main='ECDF of Tip', 
+     xlab='tip')
 
 
-ecdf(dfTips$total_bill)(15)
+ecdf(dfTips$tip)(5)
 
-quantile(dfTips$total_bill, .3)
+quantile(dfTips$tip, .3)
 
-##Data Manipulation dplyr yes
+#Next:Data Manipulation dplyr package
