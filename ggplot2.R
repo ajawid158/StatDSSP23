@@ -4,7 +4,7 @@ library(ggplot2)
 dtTips=read.csv('tips.csv')
 head(dtTips)
 
-
+#univar gaphs
 ##++++++++++++++++++Pie chart
 #Gender
 
@@ -25,7 +25,7 @@ g1=g0+geom_col()+
   ggtitle('Gender Distribution of Customers')+
   geom_text(aes(label=Count), 
             position = position_stack(vjust = .5))+
-  scale_fill_manual(values = c('blue', '#BE2A3E'))+
+  scale_fill_manual(values = c('#99FF33', '#BE2A3E'))+
   theme(legend.position = 'bottom')
 ggsave('genderDist.png')
 
@@ -33,7 +33,7 @@ g1
 
 
 ###++++++++++++++++++++++Bar Chart
-stat='identity'
+
 tGender=table(dtTips$sex)
 tGender=as.data.frame(tGender)
 colnames(tGender)=c('Gender', 'Count')
@@ -54,7 +54,7 @@ ggsave('genderBar.pdf')
 ###++++++++++++++++++++++++++Histogram
 
 g0=ggplot(dtTips, aes(x=tip))
-g0+geom_histogram(bins = 10, fill='#99FFFF', colour=6)+
+g0+geom_histogram(bins = 10, fill='#99FFFF', colour=4)+
   theme_classic()+
   theme(plot.title = element_text(face = 'bold',
                                   hjust = .5), 
@@ -73,7 +73,7 @@ ggsave('tipDistHist.png')
 ###++++++++++++++++++++Density plot
 
 g0=ggplot(dtTips, aes(x=tip))
-g0+geom_density(color='red', size=.6)+
+g0+geom_density(color='red', size=.1)+
   theme_classic()+
   xlim(0,12)+
   theme(plot.title = element_text(face = 'bold',
@@ -95,7 +95,7 @@ ggsave('tipDistHist.png')
 g0=ggplot(dtTip, aes(y='',x=tip))
 g0+geom_boxplot(fill=4, 
                 color=2, 
-                alpha=1, 
+                alpha=0.6, 
                 outlier.colour = 'blue', 
                 linetype=2, 
                 lwd=.6)+
@@ -109,7 +109,7 @@ g0+geom_boxplot(fill=4,
 ggsave('boxplotTip.png')
 
 
-
+#Bivariate graphs
 ###+++++++++++++++++++Joint graphs
 #Gender[F, M] and Smoker[Y, N] 
 
@@ -198,7 +198,7 @@ ggsave('jointboxplot.png')
 boxplot(dtTip$tip, col = 'white', horizontal = T)
 stripchart(dtTip$tip, 
            method = 'jitter', 
-           pch=19, 
+           pch=1, 
            col=4, 
            add = TRUE)
 
@@ -233,7 +233,7 @@ g0+geom_point()
 
 #modifications inside geom_point
 g0=ggplot(dtTip, aes(x=total_bill, y=tip))
-g0+geom_point(color=3, shape=20, size=3)
+g0+geom_point(color=10, shape=1, size=3)
 
 names(dtTip)
 #Modifications in aes
@@ -254,7 +254,7 @@ g0+geom_point()+
 g0+geom_point()+
   facet_wrap(~day)
 
-g0=ggplot(dtTip, aes(x=total_bill, y=tip, color=sex, size=size))
+g0=ggplot(dtTip, aes(x=total_bill, y=tip, color=time, size=size))
 g0+geom_point()+
   facet_wrap(~smoker)
 
