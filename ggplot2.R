@@ -25,7 +25,7 @@ g1=g0+geom_col()+
   ggtitle('Gender Distribution of Customers')+
   geom_text(aes(label=Count), 
             position = position_stack(vjust = .5))+
-  scale_fill_manual(values = c('#EC754A', '#BE2A3E'))+
+  scale_fill_manual(values = c('blue', '#BE2A3E'))+
   theme(legend.position = 'bottom')
 ggsave('genderDist.png')
 
@@ -33,7 +33,7 @@ g1
 
 
 ###++++++++++++++++++++++Bar Chart
-
+stat='identity'
 tGender=table(dtTips$sex)
 tGender=as.data.frame(tGender)
 colnames(tGender)=c('Gender', 'Count')
@@ -54,7 +54,7 @@ ggsave('genderBar.pdf')
 ###++++++++++++++++++++++++++Histogram
 
 g0=ggplot(dtTips, aes(x=tip))
-g0+geom_histogram(bins = 10, fill='#99FFFF', colour=4)+
+g0+geom_histogram(bins = 10, fill='#99FFFF', colour=6)+
   theme_classic()+
   theme(plot.title = element_text(face = 'bold',
                                   hjust = .5), 
@@ -90,18 +90,12 @@ g0+geom_density(color='red', size=.6)+
 ggsave('tipDistHist.png')
 
 
-
-
-###+++++++++++++++++++W7:::17.10.22
 ###+++++++++++++++++++Box Plot
 
-dtTip=read.csv('tips.csv')
-library(ggplot2)
-names(dtTip)
 g0=ggplot(dtTip, aes(y='',x=tip))
 g0+geom_boxplot(fill=4, 
                 color=2, 
-                alpha=0.9, 
+                alpha=1, 
                 outlier.colour = 'blue', 
                 linetype=2, 
                 lwd=.6)+
@@ -198,6 +192,7 @@ ggplot(dtTip, aes(x=tip, y=sex, fill=sex))+
   ylab('Gender')+
   xlim(-1,11)
 ggsave('jointboxplot.png')
+
 ######+++++++++++++++++++boxplot with points
 
 boxplot(dtTip$tip, col = 'white', horizontal = T)
@@ -232,17 +227,7 @@ ggplot(dtTip, aes(x=smoker, y=tip, color=smoker))+
   geom_beeswarm(cex=1)
 
 
-
-#ggplot2-conti
-#31.10.2022
-setwd("C:/Users/Jawid/Desktop/R/stat1")
-dtTip=read.csv('tips.csv')
-names(dtTip)
-dim(dtTip)
-##Scatter plot 
-library(ggplot2)
-names(dtTip)
-#2 QNT vars
+#2 QNT vars: Scatter plot
 g0=ggplot(dtTip, aes(x=total_bill, y=tip))
 g0+geom_point()
 
@@ -257,7 +242,7 @@ g0+geom_point()
 
 #Modifications in both 
 g0=ggplot(dtTip, aes(x=total_bill, y=tip, alpha=size))
-g0+geom_point(color=2)
+g0+geom_point(color=3, size=3)
 
 #Adding a vertical line and size
 g0=ggplot(dtTip, aes(x=total_bill, y=tip,color=time, size=size))
@@ -275,8 +260,7 @@ g0+geom_point()+
 
 ##Adding Regression line
 g0=ggplot(dtTip, aes(x=total_bill, y=tip))
-g0+
-  geom_smooth()
+g0+geom_smooth()
 
 g0=ggplot(dtTip, aes(x=total_bill, y=tip, group=sex))
 g0+geom_smooth()+
