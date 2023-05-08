@@ -45,6 +45,9 @@ lmodel2=lm(dt$tip~dt$total_bill+dt$time)
 summary(lmodel2)
 
 #we do not reject H0. No significant effect of time on tip. 
-
+#use your own dataset 
+#run at least on Bivar inf method
+#Run an SLR model for two qnts
+#submit your work as a single pdf file
 
 
