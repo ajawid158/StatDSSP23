@@ -186,13 +186,15 @@ mad(dfTips$tip)
 
 ##ECDF 
 plot(ecdf(dfTips$tip), 
-     color='blue', 
+     col='blue', 
      main='ECDF of Tip', 
      xlab='tip')
+abline(v=3.9, col='red', lty=3)
+abline(h=0.8, col='darkgreen', lty=3)
 
 
-ecdf(dfTips$tip)(5)
+ecdf(dfTips$tip)(4)
 
-quantile(dfTips$tip, .3)
+quantile(dfTips$tip, ecdf(dfTips$tip)(4))
 
 #Next:Data Manipulation dplyr package

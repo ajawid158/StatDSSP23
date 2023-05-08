@@ -91,7 +91,6 @@ gender=group_by(dfTips, sex)
 
 summarise(gender, mean(total_bill), sd(total_bill))
 smoker=group_by(dfTips, smoker)
-
 summarise(smoker, mean(tip), sd(tip))
 names(dfTips)
 

@@ -90,6 +90,28 @@ g0+geom_density(color='red', size=.1)+
 ggsave('tipDistHist.png')
 
 
+x=as.data.frame(rnorm(1000000, 170,10))
+colnames(x)=c('xN')
+head(x)
+y=as.data.frame(rnorm(1000000, 10.2,1))
+colnames(y)=c('y')
+
+
+plot(density(x$xN), 
+     col='red',
+       ylim=c(0,.04))
+lines(density(y$y),
+      col='blue')
+
+
+g0=ggplot(x, aes(x=xN))
+g0+geom_density(color='red', size=.1)+
+  theme_test()+
+  geom_vline(xintercept = 0,
+             linetype='dashed',
+             color='blue', 
+             size=1)
+
 ###+++++++++++++++++++Box Plot
 
 g0=ggplot(dtTip, aes(y='',x=tip))
